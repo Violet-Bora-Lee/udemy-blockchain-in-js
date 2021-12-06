@@ -4,7 +4,8 @@ function Blockchain() {
   // transactions that are not yet included in a block. They are stored in this array until they are included in a block.
 }
 
-Blockchain.prototype.createNewBlock = function (nonce, previousBlockHash, hash) {
+Blockchain.prototype.createNewBlock = function (nonce, previousBlockHash, hash) { 
+// 새로운 블락을 생성하는걸 mine a block 이라고도 표현한다
   const newBlock = {
     index: this.chain.length + 1, // block number(first, second, third...)
     timestamp: Date.now(), // time of creation
@@ -34,7 +35,6 @@ Blockchain.prototype.createNewTransaction = function (amount, sender, recipient)
   this.pendingTransactions.push(newTransaction);
 
   return this.getLastBlock()['index'] + 1;
-
 }
 
 
