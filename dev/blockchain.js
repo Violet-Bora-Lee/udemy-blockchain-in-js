@@ -10,7 +10,7 @@ Blockchain.prototype.createNewBlock = function(nonce, previousBlockHash, hash) {
     transactions: this.newTransactions, // transactions in this block
     nonce: nonce, // random number, proof of work thiat we've created this block in legitimate way by using the proof of work algorithm
     hash: hash, // hash of the block, hash is the data from 'the block'. It's a hash of the block data(processed by hash function).
-    previousBlockHash: this.previousBlockHash, // similar to hash, but it's the hash of the 'previous block'
+    previousBlockHash: previousBlockHash, // similar to hash, but it's the hash of the 'previous block'
   }
 
   this.newTransactions = [];
@@ -18,3 +18,9 @@ Blockchain.prototype.createNewBlock = function(nonce, previousBlockHash, hash) {
 
   return newBlock;
 }
+
+Blockchain.prototype.getLastBlock = function() {
+  return this.chain[this.chain.length - 1];
+}
+
+module.exports = Blockchain;
