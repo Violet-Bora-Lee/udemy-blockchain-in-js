@@ -45,7 +45,21 @@ Blockchain.prototype.hashBlock = function (previousBlockHash, currentBlockData, 
   return hash;
 }
 
-
+Blockchain.prototype.proofOfWork = function (previousBlockHash, currentBlockData) {
+  // bitcoin uses a proof of work algorithm to find the hash of the block.
+  // => repeatedly hash the block data until the hash starts with enough zeros such as '0000ASDFLKJSDBFJKLASDF'
+  // => use current block data for the hash, but also the previous block hash and the nonce.
+  // => nonce is a random number that is added to the hash.
+  // => continuously changes the nonce until it finds the correct hash
+  // => returns to us the nonce value that create desired hash.
+  let nonce = 0;
+  let hash = this.hashBlock(previousBlockHash, currentBlockData, nonce);
+  while (hash.substring(0, 4) !== '0000') {
+    nonce++;
+    hash = this.hashBlock(previousBlockHash, currentBlockData, nonce);
+  }
+  return nonce;
+}
 
 
 module.exports = Blockchain;
