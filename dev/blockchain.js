@@ -4,6 +4,8 @@ function Blockchain() {
   this.chain = [];
   this.pendingTransactions = [];  // pending transactions
   // transactions that are not yet included in a block. They are stored in this array until they are included in a block.
+
+  this.createNewBlock(100, '0', '0');
 }
 
 Blockchain.prototype.createNewBlock = function (nonce, previousBlockHash, hash) { 

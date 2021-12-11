@@ -20,29 +20,29 @@ console.log(bitcoin.chain[2].transactions); // 3 transactions
 
 **/
 
-const previousBlockHash = 'LKNDKFHLKJBKLKJHBFDLKJUHSDFFD';
-const currentBlockData = [
-  {
-    amout: 10,
-    sender: 'DSLKFBA<KJDBF',
-    recipient: 'VLKSUDBVKJBDV',
-  },
-  {
-    amout: 23,
-    sender: 'VSLKJBNVKJDF',
-    recipient: 'BOIUHSDN>FKJBFD',
-  },
-  {
-    amout: 4,
-    sender: 'VLIUHSDLKJFHSD',
-    recipient: 'BOIHJDS:LFKJ',
-  },
-];
+// const previousBlockHash = 'LKNDKFHLKJBKLKJHBFDLKJUHSDFFD';
+// const currentBlockData = [
+//   {
+//     amout: 10,
+//     sender: 'DSLKFBA<KJDBF',
+//     recipient: 'VLKSUDBVKJBDV',
+//   },
+//   {
+//     amout: 23,
+//     sender: 'VSLKJBNVKJDF',
+//     recipient: 'BOIUHSDN>FKJBFD',
+//   },
+//   {
+//     amout: 4,
+//     sender: 'VLIUHSDLKJFHSD',
+//     recipient: 'BOIHJDS:LFKJ',
+//   },
+// ];
 
 
-console.log(bitcoin.proofOfWork(previousBlockHash, currentBlockData));
+// console.log(bitcoin.proofOfWork(previousBlockHash, currentBlockData));
 
-console.log(bitcoin.hashBlock(previousBlockHash, currentBlockData, 76068));
+// console.log(bitcoin.hashBlock(previousBlockHash, currentBlockData, 76068));
 
 // const nonce = 100;
 
@@ -50,3 +50,4 @@ console.log(bitcoin.hashBlock(previousBlockHash, currentBlockData, 76068));
 
 // console.log(hashedBlock);
 
+console.log(bitcoin);
