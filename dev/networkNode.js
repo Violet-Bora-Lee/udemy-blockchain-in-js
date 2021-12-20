@@ -39,8 +39,23 @@ app.get('/mine', function (req, res) {
     note: 'New block mined successfully.',
     block: newBlock
   })
-  
 })
+
+// register a node and "broadcast" it to the entire network
+app.post('/register-and-broadcast-node', function(req, res) {
+  const newNodeUrl = req.body.newNodeUrl;
+});
+
+// 위 메서드와 다른점은, broadcast는 한번만 일어나면 되기 때문에, 브로드캐스트가 일어난 노드는 그냥 등록만 마치면 되므로 별도의 메서드가 필요하다.
+// register a node with the network
+app.post('/register-node', function(req, res) {
+
+});
+
+// register multiple nodes at once
+app.post('/register-nodes-bulk', function(req, res) {
+
+});
 
 app.listen(3000, function() {
   console.log(`Listening on port ${port}...`);
