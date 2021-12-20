@@ -2,7 +2,8 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser');
 const Blockchain = require('./blockchain');
-const uuid = require('uuid/v1');
+const {v1: uuid} = require('uuid');
+const port = process.argv[2];
 
 const nodeAddress = uuid().split('-').join('');
 
@@ -11,7 +12,7 @@ const bitcoin = new Blockchain();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
- 
+
 app.get('/blockchain', function (req, res) {
   res.send(bitcoin);
 })
@@ -40,7 +41,7 @@ app.get('/mine', function (req, res) {
   })
   
 })
- 
+
 app.listen(3000, function() {
-  console.log('Listining on port 3000...');
+  console.log(`Listening on port ${port}...`);
 })

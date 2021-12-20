@@ -1,14 +1,18 @@
 const sha256 = require('sha256');
+const currentNodeUrl = process.argv[3];
 
 function Blockchain() {
   this.chain = [];
   this.pendingTransactions = [];  // pending transactions
   // transactions that are not yet included in a block. They are stored in this array until they are included in a block.
+  
+  this.currentNodeUrl = currentNodeUrl;
+  this.networkNodes = [];
 
   this.createNewBlock(100, '0', '0');
 }
 
-Blockchain.prototype.createNewBlock = function (nonce, previousBlockHash, hash) { 
+Blockchain.prototype.createNewBlock = function (nonce, previousBlockHash, hash) {
 // 새로운 블락을 생성하는걸 mine a block 이라고도 표현한다
   const newBlock = {
     index: this.chain.length + 1, // block number(first, second, third...)
@@ -42,7 +46,7 @@ Blockchain.prototype.createNewTransaction = function (amount, sender, recipient)
 }
 
 Blockchain.prototype.hashBlock = function (previousBlockHash, currentBlockData, nonce) {
-  const dataAsString = previousBlockHash + nonce.toString() + JSON.stringify(currentBlockData); 
+  const dataAsString = previousBlockHash + nonce.toString() + JSON.stringify(currentBlockData);
   const hash = sha256(dataAsString);
   return hash;
 }
