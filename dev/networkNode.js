@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const Blockchain = require('./blockchain');
 const {v1: uuid} = require('uuid');
 const port = process.argv[2];
-const rp = require('request-promise');
+const requestPromise = require('request-promise');
 
 const nodeAddress = uuid().split('-').join('');
 
@@ -57,7 +57,7 @@ app.post('/register-and-broadcast-node', function(req, res) {
       body: {newNodeUrl},
       json: true,
     };
-    regNodesPromises.push(rp(requestOptions));
+    regNodesPromises.push(requestPromise(requestOptions));
   });
   
   Promise.all(regNodesPromises)
@@ -68,7 +68,7 @@ app.post('/register-and-broadcast-node', function(req, res) {
       body: { allNetworkNodes: [...bitcoin.networkNodes, bitcoin.currentNodeUrl] },
       json: true,
     };
-    return rp(bulkRegisterOptions);
+    return requestPromise(bulkRegisterOptions);
   })
   .then(data => {
     res.json({note: 'New node registered with network successfully'})
@@ -79,7 +79,15 @@ app.post('/register-and-broadcast-node', function(req, res) {
 // 위 메서드와 다른점은, broadcast는 한번만 일어나면 되기 때문에, 브로드캐스트가 일어난 노드는 그냥 등록만 마치면 되므로 별도의 메서드가 필요하다.
 // register a node with the network
 app.post('/register-node', function(req, res) {
-
+  const newNodeUrl = req.body.newNodeUrl;
+  const nodeNotAlreadyPresent = bitcoin.networkNodes.indexOf(newNodeUrl) === -1;
+  const notCurrentNode = bitcoin.currentNodeUrl !== newNodeUrl;
+  
+  if (nodeNotAlreadyPresent && notCurrentNode) {
+    bitcoin.networkNodes.push(newNodeUrl);
+  }
+  
+  res.json({ note: 'New node registered successfully with node. '})
 });
 
 // register multiple nodes at once
